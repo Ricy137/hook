@@ -1,0 +1,11 @@
+.swiper-pagination {
+  @apply !left-32px text-start;
+}
+
+.swiper-pagination-bullet-active {
+  @apply bg-#2C3E5A;
+}
+
+.swiper-pagination-bullet {
+  @apply w-16px h-16px rounded-0px;
+}

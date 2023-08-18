@@ -1,13 +1,14 @@
-import { defineConfig } from 'vite';
-import path from 'path';
-import react from '@vitejs/plugin-react';
-import Unocss from 'unocss/vite';
-import presetIcons from '@unocss/preset-icons';
-import presetWind from '@unocss/preset-wind';
-import transformerDirective from '@unocss/transformer-directives';
-import { visualizer } from 'rollup-plugin-visualizer';
-import viteCompression from 'vite-plugin-compression';
-import { VitePWA } from 'vite-plugin-pwa';
+import { defineConfig } from "vite";
+import path from "path";
+import react from "@vitejs/plugin-react";
+import Unocss from "unocss/vite";
+import presetIcons from "@unocss/preset-icons";
+import presetWind from "@unocss/preset-wind";
+import transformerDirective from "@unocss/transformer-directives";
+//TODO: upgrade
+// import { visualizer } from "rollup-plugin-visualizer";
+import viteCompression from "vite-plugin-compression";
+import { VitePWA } from "vite-plugin-pwa";
 
 export default defineConfig({
   plugins: [
@@ -16,10 +17,10 @@ export default defineConfig({
       presets: [
         presetWind(),
         presetIcons({
-          prefix: 'i-',
+          prefix: "i-",
           extraProperties: {
-            display: 'inline-block',
-            'vertical-align': 'middle',
+            display: "inline-block",
+            "vertical-align": "middle",
           },
         }),
       ],
@@ -55,7 +56,7 @@ export default defineConfig({
     //   },
     // }),
     VitePWA({
-      registerType: 'autoUpdate',
+      registerType: "autoUpdate",
       devOptions: {
         enabled: true,
       },
@@ -63,22 +64,22 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      '@assets': path.resolve(__dirname, 'src/assets'),
-      '@utils': path.resolve(__dirname, 'src/utils'),
-      '@modules': path.resolve(__dirname, 'src/modules'),
-      '@pages': path.resolve(__dirname, 'src/pages'),
-      '@router': path.resolve(__dirname, 'src/router'),
-      '@store': path.resolve(__dirname, 'src/store'),
-      '@hooks': path.resolve(__dirname, 'src/hooks'),
-      '@components': path.resolve(__dirname, 'src/components'),
-      '@service': path.resolve(__dirname, 'src/service'),
-      '@i18n': path.resolve(__dirname, 'src/i18n'),
+      "@assets": path.resolve(__dirname, "src/assets"),
+      "@utils": path.resolve(__dirname, "src/utils"),
+      "@modules": path.resolve(__dirname, "src/modules"),
+      "@pages": path.resolve(__dirname, "src/pages"),
+      "@router": path.resolve(__dirname, "src/router"),
+      "@store": path.resolve(__dirname, "src/store"),
+      "@hooks": path.resolve(__dirname, "src/hooks"),
+      "@components": path.resolve(__dirname, "src/components"),
+      "@service": path.resolve(__dirname, "src/service"),
+      // '@i18n': path.resolve(__dirname, 'src/i18n'),
     },
   },
   build: {
-    rollupOptions: {
-      plugins: [visualizer()],
-    },
-    target: ['esnext'],
+    // rollupOptions: {
+    //   plugins: [visualizer()],
+    // },
+    target: ["esnext"],
   },
 });
