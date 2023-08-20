@@ -23,7 +23,7 @@ export const SlogonCard: React.FC<SlogonCard> = ({
   >
     <div className="text-18px leading-26px font-medium">{title}</div>
     <Link to={to} className="no-underline">
-      <Button>Learn More</Button>
+      <Button variant="outlined">Learn More</Button>
     </Link>
     <div>{description}</div>
   </div>

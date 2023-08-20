@@ -1,0 +1,16 @@
+/* contained button */
+.fui-button--contained {
+  @apply bg-#000000 text-#FBF6F1;
+}
+
+.fui-button--contained:hover {
+  @apply bg-transparent text-#000000;
+}
+
+.fui-button--outlined {
+  @apply bg-transparent text-#000000;
+}
+
+.fui-button--outlined:hover {
+  @apply bg-#000000 text-#FBF6F1;
+}

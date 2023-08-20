@@ -1,9 +1,11 @@
 import React, { forwardRef, type PropsWithChildren } from "react";
 import cx from "clsx";
+import "./index.css";
 
 export interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: "contained" | "outlined";
   fullWidth?: boolean;
-  loading?: boolean | "start" | "end";
+  loading?: boolean;
 }
 
 const Button = forwardRef<HTMLButtonElement, PropsWithChildren<Props>>(
@@ -14,6 +16,7 @@ const Button = forwardRef<HTMLButtonElement, PropsWithChildren<Props>>(
       disabled = false,
       fullWidth = false,
       loading = false,
+      variant = "contained",
       ...props
     },
     _forwardRef
@@ -21,7 +24,8 @@ const Button = forwardRef<HTMLButtonElement, PropsWithChildren<Props>>(
     return (
       <button
         className={cx(
-          "px-[40px] flex flex-row justify-center items-center h-[36px] border-1px border-solid border-#0000000 whitespace-nowrap cursor-pointer rounded-[30px] hover:bg-#000000 hover:text-#FBF6F1",
+          `fui-button--${variant}`,
+          "px-[40px] flex flex-row justify-center items-center h-[36px] border-1px border-solid border-#000000 whitespace-nowrap cursor-pointer rounded-[30px]",
           (loading || disabled) &&
             "bg-gray-400 pointer-events-none cursor-not-allowed",
           fullWidth ? "w-full" : "w-fit",

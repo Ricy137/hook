@@ -27,7 +27,6 @@ export default defineConfig({
     }),
     react(),
     viteCompression(),
-    // VitePWA({
     //   workbox: {
     //     globPatterns: ['**/*'],
     //   },
@@ -82,4 +81,18 @@ export default defineConfig({
     // },
     target: ["esnext"],
   },
+  // optimizeDeps: {
+  //   esbuildOptions: {
+  //     // Node.js global to browser globalThis
+  //     define: {
+  //       global: "globalThis",
+  //     },
+  //     // Enable esbuild polyfill plugins
+  //     plugins: [
+  //       NodeGlobalsPolyfillPlugin({
+  //         buffer: true,
+  //       }),
+  //     ],
+  //   },
+  // },
 });

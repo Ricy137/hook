@@ -12,7 +12,7 @@ const Plaza: React.FC = () => {
   const [activeId, setActiveId] = useState(0);
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 w-85% min-h-50vh border-#cacbcb border-1px border-solid">
+    <div className="grid grid-cols-1 md:grid-cols-2 w-85% min-h-80vh xl:min-h-70vh 2xl:min-h-50vh border-#cacbcb border-1px border-solid">
       <Swiper
         className="w-full h-full"
         modules={[EffectFade, Pagination, Autoplay]}
@@ -50,7 +50,7 @@ const Plaza: React.FC = () => {
           </SwiperSlide>
         </div>
       </Swiper>
-      <div className="invisible md:visible border-#cacbcb border-l-1px border-l-solid">
+      <div className="hidden md:block border-#cacbcb border-l-1px border-l-solid">
         <BannerAnim activeId={activeId} />
       </div>
     </div>

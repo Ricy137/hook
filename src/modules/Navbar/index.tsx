@@ -1,6 +1,7 @@
 import React, { useState, useEffect, type ComponentProps } from "react";
 import cx from "clsx";
 import { Link, useLocation } from "react-router-dom";
+import AuthConBtn from "@modules/AuthConBtn";
 import AnimatedLogo from "@modules/AnimatedLogo";
 import Mobile from "./Mobile";
 import "./index.css";
@@ -42,12 +43,6 @@ const Navbar: React.FC = () => {
         )}
       >
         <Link to="/">
-          {/* <img
-            src="/dope.svg"
-            alt="HOOK icon"
-            draggable={false}
-            className="w-24px h-24px mr-auto sm:mr-40px"
-          /> */}
           <AnimatedLogo />
         </Link>
         <ul className="navbar-linkArea display-none sm:flex h-full items-center text-16px font-semibold">
@@ -58,7 +53,7 @@ const Navbar: React.FC = () => {
             Plaza
           </NavLink>
         </ul>
-
+        <AuthConBtn>Test</AuthConBtn>
         <label
           className="burger-container ml-20px sm:display-none"
           htmlFor="burger-check"
