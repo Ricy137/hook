@@ -12,9 +12,9 @@ const Plaza: React.FC = () => {
   const [activeId, setActiveId] = useState(0);
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 w-85% min-h-80vh xl:min-h-70vh 2xl:min-h-50vh border-#cacbcb border-1px border-solid">
+    <div className="grid grid-cols-1 md:grid-cols-2 w-85% min-h-80vh xl:min-h-70vh 2xl:min-h-50vh border-#cacbcb border-1px border-solid overflow-hidden">
       <Swiper
-        className="w-full h-full"
+        className="w-full"
         modules={[EffectFade, Pagination, Autoplay]}
         effect="fade"
         autoplay={{ delay: 3000 }}
@@ -26,7 +26,7 @@ const Plaza: React.FC = () => {
         }}
         slidesPerView={1}
       >
-        <div>
+        <div className="w-full h-full relative">
           <SwiperSlide className="w-full h-full">
             <SlogonCard
               to="/create/profile"

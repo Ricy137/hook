@@ -3,6 +3,7 @@ import cx from "clsx";
 import { Link, useLocation } from "react-router-dom";
 import AuthConBtn from "@modules/AuthConBtn";
 import AnimatedLogo from "@modules/AnimatedLogo";
+import AddressBoard from "@modules/AddressBoard";
 import Mobile from "./Mobile";
 import "./index.css";
 
@@ -45,7 +46,7 @@ const Navbar: React.FC = () => {
         <Link to="/">
           <AnimatedLogo />
         </Link>
-        <ul className="navbar-linkArea display-none sm:flex h-full items-center text-16px font-semibold">
+        <ul className="navbar-linkArea mr-auto display-none sm:flex h-full items-center text-16px font-semibold">
           <NavLink
             to="/plaza"
             curPath={curPath === "/" || curPath === "/plaza"}
@@ -53,20 +54,24 @@ const Navbar: React.FC = () => {
             Plaza
           </NavLink>
         </ul>
-        <AuthConBtn>Test</AuthConBtn>
-        <label
-          className="burger-container ml-20px sm:display-none"
-          htmlFor="burger-check"
-        >
-          <input
-            className="burger-check"
-            id="burger-check"
-            type="checkbox"
-            checked={isMobileMenuOpen}
-            onChange={(e) => setIsMobileMenuOpen(e.target.checked)}
-          />
-          <span className="burger" />
-        </label>
+        <div className="flex flex-row justify-between items-center gap-x-8px">
+          <AuthConBtn>
+            <AddressBoard />
+          </AuthConBtn>
+          <label
+            className="burger-container ml-20px sm:display-none"
+            htmlFor="burger-check"
+          >
+            <input
+              className="burger-check"
+              id="burger-check"
+              type="checkbox"
+              checked={isMobileMenuOpen}
+              onChange={(e) => setIsMobileMenuOpen(e.target.checked)}
+            />
+            <span className="burger" />
+          </label>
+        </div>
       </nav>
     </header>
   );

@@ -26,11 +26,12 @@ export interface Modal {
 const isOpenAtom = atom(false);
 const modalAtom = atom<Modal | null>(null);
 
-export const useModal = (param: Omit<Modal, "id">) => {
+export const useModal = (param?: Omit<Modal, "id">) => {
   const setIsOpen = useSetAtom(isOpenAtom);
   const setModal = useSetAtom(modalAtom);
 
   const showModal = useCallback(() => {
+    if (!param) return;
     setModal({ ...param, id: uniqueId() });
     setIsOpen(true);
   }, []);

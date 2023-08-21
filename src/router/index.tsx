@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import Navbar from "@modules/Navbar";
 import Plaza from "@pages/Plaza";
+import Profile from "@pages/Profile";
 
 const AppRouter: React.FC = () => {
   return (
@@ -17,6 +18,7 @@ const AppRouter: React.FC = () => {
           <Routes>
             <Route index path="/" element={<Plaza />} />
             <Route key="plaza" path="plaza" element={<Plaza />} />
+            <Route key="profile" path="profile" element={<Profile />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         </div>
