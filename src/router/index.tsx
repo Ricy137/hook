@@ -8,6 +8,7 @@ import {
 import Navbar from "@modules/Navbar";
 import Plaza from "@pages/Plaza";
 import Profile from "@pages/Profile";
+import CreateProfile from "@pages/Profile/CreateProfile";
 
 const AppRouter: React.FC = () => {
   return (
@@ -19,6 +20,11 @@ const AppRouter: React.FC = () => {
             <Route index path="/" element={<Plaza />} />
             <Route key="plaza" path="plaza" element={<Plaza />} />
             <Route key="profile" path="profile" element={<Profile />} />
+            <Route
+              key="profileCreate"
+              path="profile/create"
+              element={<CreateProfile />}
+            />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         </div>

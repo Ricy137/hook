@@ -7,10 +7,22 @@
   @apply bg-transparent text-#000000;
 }
 
+/* outlined button */
+
 .fui-button--outlined {
   @apply bg-transparent text-#000000;
 }
 
 .fui-button--outlined:hover {
   @apply bg-#000000 text-#FBF6F1;
+}
+
+/* text button */
+.fui-button--text {
+  @apply !border-none bg-transparent text-[#111111];
+}
+
+.fui-button--text.fui-button--primary:hover,
+.fui-button--text.fui-button--primary:focus-visible {
+  @apply bg-[#F7F8FA] text-#303549;
 }

@@ -3,7 +3,7 @@ import cx from "clsx";
 import "./index.css";
 
 export interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "contained" | "outlined";
+  variant?: "contained" | "outlined" | "text";
   fullWidth?: boolean;
   loading?: boolean;
 }

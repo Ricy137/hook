@@ -108,7 +108,7 @@ const ModalRender: React.FC = () => {
                 >
                   {modal?.title}
                   <span
-                    className="i-ep:close-bold text-14px text-#606266 cursor-pointer"
+                    className="i-ep:close-bold ml-8px text-14px text-#606266 cursor-pointer"
                     onClick={() => setIsOpen(false)}
                   />
                 </div>
