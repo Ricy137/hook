@@ -25,6 +25,7 @@
     "buffer": "^6.0.3",
     "clsx": "^2.0.0",
     "create": "^0.0.2",
+    "ethers": "^6.7.1",
     "events": "^3.3.0",
     "jotai": "^2.2.3",
     "localstorage-enhance": "^1.0.1",

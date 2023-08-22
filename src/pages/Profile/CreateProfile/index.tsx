@@ -1,10 +1,11 @@
 import { useCallback, MouseEvent, useState } from "react";
 import { useForm } from "react-hook-form";
+import { isAddress } from "ethers";
 import Input from "@components/Input";
 import TextArea from "@components/TextArea";
 import Button from "@components/Button";
 import { useModal } from "@components/Modal";
-import { createProfile } from "@service/registry";
+import { useCreateProfile } from "@service/registry";
 import MembersFromItem from "./MembersFormItem";
 import CustomizedItemModal, {
   CustomizedItemData,
@@ -12,7 +13,6 @@ import CustomizedItemModal, {
 } from "./CustomizedItemModal";
 
 //Form to create the profile
-
 export interface ProfileDate {
   name: string;
   owner: string;
@@ -32,6 +32,7 @@ const CreateProfile: React.FC = () => {
     formState: { errors },
     control,
   } = useForm<ProfileDate>();
+  const { createProfile } = useCreateProfile();
 
   const handleAddCustomizedItem = useCallback((data: CustomizedItemData) => {
     setCustomizedItems([...customizedItems, data]);
@@ -55,7 +56,6 @@ const CreateProfile: React.FC = () => {
       try {
         let res = await createProfile(data, customizedItems);
         console.log("res", res);
-        debugger;
       } catch (error) {
         console.log(error);
       }
@@ -80,7 +80,10 @@ const CreateProfile: React.FC = () => {
         title="Profile Owner Address"
         type="text"
         error={!!errors.name}
-        {...register("owner", { required: true })}
+        {...register("owner", {
+          required: true,
+          validate: (value) => isAddress(value),
+        })}
         placeholder="0xAEc621EC8D9dE4B524f4864791171045d6BBBe27"
         required
       />

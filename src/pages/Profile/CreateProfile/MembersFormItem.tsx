@@ -6,6 +6,7 @@ import {
   useEffect,
 } from "react";
 import { Control, useController } from "react-hook-form";
+import { isAddress } from "ethers";
 import Input from "@components/Input";
 import Button from "@components/Button";
 import { ProfileDate } from "./index";
@@ -19,7 +20,7 @@ const MembersFromItem: React.FC<{
   } = useController({
     control,
     name: "members",
-    rules: { required: true },
+    rules: { required: true, validate: (value) => isAddress(value) },
   });
   const [memberFeilds, setMemberFeilds] = useState<string[]>([""]);
 
