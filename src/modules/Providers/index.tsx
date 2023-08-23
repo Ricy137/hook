@@ -1,10 +1,15 @@
 import { PropsWithChildren } from "react";
-import "@celo/react-celo/lib/styles.css";
 import { WagmiConfig, createConfig, configureChains } from "wagmi";
 import { celoAlfajores } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
 import { InjectedConnector } from "wagmi/connectors/injected";
 import { WalletConnectConnector } from "wagmi/connectors/walletConnect";
+import {
+  ApolloProvider,
+  ApolloClient,
+  createHttpLink,
+  InMemoryCache,
+} from "@apollo/client";
 
 const { publicClient, chains } = configureChains(
   [celoAlfajores],
@@ -24,12 +29,22 @@ const config = createConfig({
     }),
   ],
 });
-// import Dope from "/dope.svg";
+
+const httpLink = createHttpLink({
+  uri: "https://api.thegraph.com/subgraphs/name/ricy137/hook",
+});
+
+const client = new ApolloClient({
+  link: httpLink,
+  cache: new InMemoryCache(),
+});
 
 const Providers: React.FC<PropsWithChildren> = ({ children }) => {
   return (
     <WagmiConfig config={config}>
-      <>{children}</>
+      <ApolloProvider client={client}>
+        <>{children}</>
+      </ApolloProvider>
     </WagmiConfig>
   );
 };

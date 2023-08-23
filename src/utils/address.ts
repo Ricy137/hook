@@ -9,3 +9,9 @@ export const shortenAddress = ({
 }) => {
   return `${address.slice(0, preLen)}...${address.slice(-sufLen)}`;
 };
+
+//
+export const splitedAddress = (address: string) => {
+  const splitedArray = address.split("-");
+  return splitedArray[1];
+};

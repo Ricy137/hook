@@ -20,7 +20,19 @@ const MembersFromItem: React.FC<{
   } = useController({
     control,
     name: "members",
-    rules: { required: true, validate: (value) => isAddress(value) },
+    rules: {
+      required: true,
+      //TODO: abstract
+      validate: (values) => {
+        let valified = true;
+        values.forEach((value) => {
+          if (!isAddress(value)) {
+            valified = false;
+          }
+        });
+        return valified;
+      },
+    },
   });
   const [memberFeilds, setMemberFeilds] = useState<string[]>([""]);
 

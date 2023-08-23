@@ -9,6 +9,8 @@ import Navbar from "@modules/Navbar";
 import Plaza from "@pages/Plaza";
 import Profile from "@pages/Profile";
 import CreateProfile from "@pages/Profile/CreateProfile";
+import ProfileDetail from "@pages/ProfileDetail";
+import ExplorerProfile from "@pages/Explorer/profile";
 
 const AppRouter: React.FC = () => {
   return (
@@ -21,9 +23,19 @@ const AppRouter: React.FC = () => {
             <Route key="plaza" path="plaza" element={<Plaza />} />
             <Route key="profile" path="profile" element={<Profile />} />
             <Route
+              key="profileId"
+              path="profile/:profileId"
+              element={<ProfileDetail />}
+            />
+            <Route
               key="profileCreate"
               path="profile/create"
               element={<CreateProfile />}
+            />
+            <Route
+              key="explorerProfile"
+              path="explorer/profile/:OwnerAddress"
+              element={<ExplorerProfile />}
             />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>

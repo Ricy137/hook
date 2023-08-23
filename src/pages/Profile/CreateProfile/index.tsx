@@ -32,7 +32,10 @@ const CreateProfile: React.FC = () => {
     formState: { errors },
     control,
   } = useForm<ProfileDate>();
-  const { createProfile } = useCreateProfile();
+  const { createProfile, isLoading, isSuccess, error } = useCreateProfile();
+  console.log("isLoading", isLoading);
+  console.log("isSuccess", isSuccess);
+  console.log("error", error);
 
   const handleAddCustomizedItem = useCallback((data: CustomizedItemData) => {
     setCustomizedItems([...customizedItems, data]);

@@ -27,7 +27,7 @@ const AddressBoard = () => {
 const AddressBoardDropdown = () => {
   return (
     <div className="p-12px w-163px bg-#FBF6F1 border-#cacbcb border-b-1px border-x-1px border-solid rounded-b-8px box-border">
-      My Profiles
+      Owned Profiles
     </div>
   );
 };

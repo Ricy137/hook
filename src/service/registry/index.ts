@@ -1,4 +1,4 @@
-import { useContractWrite, usePrepareContractWrite } from "wagmi";
+import { useContractWrite, useAccount } from "wagmi";
 import { ProfileDate } from "@pages/Profile/CreateProfile";
 import { CustomizedItemData } from "@pages/Profile/CreateProfile/CustomizedItemModal";
 import { web3StorageClient } from "@utils/web3Storage";
@@ -10,6 +10,7 @@ export const useCreateProfile = () => {
   //   abi: RegistryAbi,
   //   functionName: "createProfile",
   // });
+  const { connector } = useAccount();
 
   const { data, isLoading, isSuccess, write, error } = useContractWrite({
     address: "0xAEc621EC8D9dE4B524f4864791171045d6BBBe27",
@@ -48,19 +49,20 @@ export const useCreateProfile = () => {
     customizedItems: CustomizedItemData[]
   ) => {
     try {
+      if (!write) throw new Error("Error creating profile");
       const cid = await uploadIPFS(data, customizedItems);
-      let res = await write?.({
-        args: {
+      let res = await write({
+        args: [
           //TODO: nounce should be dynamic
-          _nounce: new Date().getTime(),
-          _name: data.name,
-          _metadata: {
+          new Date().getTime(),
+          data.name,
+          {
             protocol: 1,
-            pointer: cid,
+            pointer: `${cid}/metadata.json`,
           },
-          _owner: data.owner,
-          _members: data.members,
-        },
+          data.owner,
+          [...data.members],
+        ],
       });
       return res;
     } catch (err) {

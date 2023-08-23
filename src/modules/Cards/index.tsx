@@ -1,7 +1,8 @@
 import { ReactNode } from "react";
-import Button from "@components/Button";
 import { Link } from "react-router-dom";
 import cx from "clsx";
+import Button from "@components/Button";
+import Card from "@components/Card";
 
 export interface SlogonCardProps {
   title: string;
@@ -70,3 +71,23 @@ export const SectionCard: React.FC<SectionCardProps> = ({
     {children}
   </div>
 );
+
+export const AddreProfileCard: React.FC<{ address: string }> = ({
+  address,
+}) => {
+  return (
+    <Link
+      to={`/explorer/profile/${address}`}
+      className="flex w-full no-underline"
+    >
+      <Card className="flex justify-end items-center">
+        <div className="flex flex-col gap-y-24px ">
+          <div className="flex flex-col text-16px leading-26px break-all">
+            <span className="mb-8px">address: </span>
+            {address}
+          </div>
+        </div>
+      </Card>
+    </Link>
+  );
+};
