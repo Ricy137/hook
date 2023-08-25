@@ -1,11 +1,14 @@
 import ProfileOwned from "./ProfileOwned";
+import PoolManaged from "./PoolsManaging";
 
 const Profile: React.FC = () => {
   return (
-    <div className="w-85% flex flex-col">
-      <div className="font-medium text-32px leading-40px mb-24px">Profiles Owned</div>
+    <div className="w-85% flex flex-col gap-y-24px">
       <div className="w-full flex flex-col gap-y-40px">
         <ProfileOwned />
+      </div>
+      <div className="w-full flex flex-col gap-y-40px">
+        <PoolManaged />
       </div>
     </div>
   );

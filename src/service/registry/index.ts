@@ -1,6 +1,6 @@
 import { useContractWrite, useAccount } from "wagmi";
 import { ProfileDate } from "@pages/Profile/CreateProfile";
-import { CustomizedItemData } from "@pages/Profile/CreateProfile/CustomizedItemModal";
+import { CustomizedItemData } from "@modules/CustomizedItemModal";
 import { web3StorageClient } from "@utils/web3Storage";
 import RegistryAbi from "@utils/abis/Registry.json";
 

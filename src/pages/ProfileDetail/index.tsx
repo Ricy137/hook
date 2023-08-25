@@ -97,7 +97,6 @@ const ProfileMetaData: React.FC<{ pointer: string }> = ({ pointer }) => {
     `https://${pointer}.ipfs.w3s.link/metadata.json`,
     fetcher
   );
-  console.log("metadata", data, isLoading, error);
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error! {error.message}</div>;
   return (

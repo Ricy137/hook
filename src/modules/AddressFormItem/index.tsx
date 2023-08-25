@@ -9,23 +9,23 @@ import { Control, useController } from "react-hook-form";
 import { isAddress } from "ethers";
 import Input from "@components/Input";
 import Button from "@components/Button";
-import { ProfileDate } from "./index";
 
-const MembersFromItem: React.FC<{
-  control: Control<ProfileDate, any>;
-}> = ({ control }) => {
+const AddressFormItem: React.FC<{
+  control: Control<any, any>;
+  text?: string;
+}> = ({ control, text }) => {
   const {
     field,
     formState: { errors },
   } = useController({
     control,
-    name: "members",
+    name: text ?? "members",
     rules: {
       required: true,
       //TODO: abstract
       validate: (values) => {
         let valified = true;
-        values.forEach((value) => {
+        values.forEach((value: string) => {
           if (!isAddress(value)) {
             valified = false;
           }
@@ -67,7 +67,9 @@ const MembersFromItem: React.FC<{
         index === 0 ? (
           <Input
             key="members-initial"
-            title="Enter the EVM address of the members of your profile"
+            title={`Enter the EVM address of the ${
+              text ?? "members"
+            } of your profile`}
             type="text"
             error={!!errors.members}
             placeholder="0xAEc621EC8D9dE4B524f4864791171045d6BBBe27"
@@ -78,7 +80,9 @@ const MembersFromItem: React.FC<{
           <div key={field} className="flex flex-row items-center gap-x-8px">
             <Input
               wrapperClassName="grow"
-              title="Enter the EVM address of the members of your profile"
+              title={`Enter the EVM address of the ${
+                text ?? "members"
+              } of your profile`}
               type="text"
               error={!!errors.members}
               placeholder="0xAEc621EC8D9dE4B524f4864791171045d6BBBe27"
@@ -94,11 +98,11 @@ const MembersFromItem: React.FC<{
       )}
       <div className="w-full flex justify-end">
         <Button variant="text" onClick={handleAppendMember}>
-          + add member
+          + add {text ?? "member"}
         </Button>
       </div>
     </div>
   );
 };
 
-export default MembersFromItem;
+export default AddressFormItem;

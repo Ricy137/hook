@@ -5,24 +5,27 @@ import Input from "@components/Input";
 import TextArea from "@components/TextArea";
 import Button from "@components/Button";
 import { useModal } from "@components/Modal";
-import { useCreateProfile } from "@service/registry";
-import MembersFromItem from "@modules/AddressFormItem";
+import AddressFormItem from "@modules/AddressFormItem";
 import CustomizedItemModal, {
   CustomizedItemData,
   CuteomizedFormItems,
 } from "@modules/CustomizedItemModal";
+import ProfileSelect from "./ProfileSelect";
+import StrategyFormItem from "./StrategyFormItem";
 
-//Form to create the profile
-export interface ProfileDate {
+//Form to create the pool
+export interface PoolData {
   name: string;
-  owner: string;
+  profileId: string;
   description: string;
-  github?: string;
-  socialMedia: string;
-  members: string[];
+  eligibility: string;
+  applyLink: string;
+  managers: string[];
+  strategy: string;
+  customizedStrategy: boolean;
   // customizedItems: CustomizedItemData[];
 }
-const CreateProfile: React.FC = () => {
+const CreatePool: React.FC = () => {
   const [customizedItems, setCustomizedItems] = useState<CustomizedItemData[]>(
     []
   );
@@ -31,8 +34,8 @@ const CreateProfile: React.FC = () => {
     handleSubmit,
     formState: { errors },
     control,
-  } = useForm<ProfileDate>();
-  const { createProfile, isLoading, isSuccess, error } = useCreateProfile();
+    setValue,
+  } = useForm<PoolData>();
 
   const handleAddCustomizedItem = useCallback((data: CustomizedItemData) => {
     setCustomizedItems([...customizedItems, data]);
@@ -54,8 +57,7 @@ const CreateProfile: React.FC = () => {
   const handleSubmitForm = useCallback(
     async (data: any) => {
       try {
-        let res = await createProfile(data, customizedItems);
-        console.log("res", res);
+        console.log("data", data);
       } catch (error) {
         console.log(error);
       }
@@ -69,47 +71,38 @@ const CreateProfile: React.FC = () => {
       onSubmit={handleSubmit(handleSubmitForm)}
     >
       <Input
-        title="Profile Name"
+        title="Pool Name"
         type="text"
         error={!!errors.name}
         {...register("name", { required: true })}
-        placeholder="Please enter your the name of your profile"
+        placeholder="Please enter your the name of your pool"
         required
       />
-      <Input
-        title="Profile Owner Address"
-        type="text"
-        error={!!errors.name}
-        {...register("owner", {
-          required: true,
-          validate: (value) => isAddress(value),
-        })}
-        placeholder="0xAEc621EC8D9dE4B524f4864791171045d6BBBe27"
+      <ProfileSelect setValue={setValue} />
+      <StrategyFormItem setValue={setValue} control={control} />
+      <TextArea
+        title="Pool Description"
+        error={!!errors.description}
+        {...register("description", { required: true })}
+        placeholder="Please enter your the description of your pool"
         required
       />
       <TextArea
-        title="Profile Description"
+        title="Eligibility"
         error={!!errors.description}
-        {...register("description", { required: true })}
-        placeholder="Please enter your the description of your profile"
+        {...register("eligibility", { required: true })}
+        placeholder="Please describe the eligibility of the pool"
         required
       />
       <Input
-        title="Link to your Github Profile"
+        title="Apply"
         type="text"
-        error={!!errors.github}
-        {...register("github")}
-        placeholder="https://github.com/Ricy137/hook"
-      />
-      <Input
-        title="Link to your social media"
-        type="text"
-        error={!!errors.github}
-        {...register("socialMedia", { required: true })}
-        placeholder="https://lenster.xyz/u/cuckooir"
+        error={!!errors.description}
+        {...register("applyLink", { required: true })}
+        placeholder="Please provide the link to apply the pool"
         required
       />
-      <MembersFromItem control={control} />
+      <AddressFormItem text="manager" control={control} />
       <CuteomizedFormItems
         customizedItems={customizedItems}
         setCustomizedItems={setCustomizedItems}
@@ -124,4 +117,4 @@ const CreateProfile: React.FC = () => {
   );
 };
 
-export default CreateProfile;
+export default CreatePool;

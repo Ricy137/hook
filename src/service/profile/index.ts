@@ -11,8 +11,13 @@ interface MetaData {
   pointer: string;
 }
 
+export interface Role {
+  id: string;
+}
+
 export interface Account {
   id: string;
+  roles: Role[];
 }
 
 export interface ProfileDetailData extends ProfileData {

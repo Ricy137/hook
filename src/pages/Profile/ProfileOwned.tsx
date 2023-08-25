@@ -17,7 +17,7 @@ const ProfileOwned: React.FC = () => {
 
 const CreateProfileBtn: React.FC = () => {
   return (
-    <Link to="/profile/create" className="mt-24px no-underline">
+    <Link to="/profile/createprofile" className="mt-24px no-underline">
       <Button variant="outlined">Create Profile</Button>
     </Link>
   );
