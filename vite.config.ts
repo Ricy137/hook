@@ -28,9 +28,33 @@ export default defineConfig({
     react(),
     viteCompression(),
     VitePWA({
+      injectRegister: "auto",
       registerType: "autoUpdate",
       devOptions: {
         enabled: true,
+      },
+      includeAssets: ["dope.svg"],
+      manifest: {
+        name: "Hook",
+        short_name: "Hook",
+        icons: [
+          {
+            src: "pwa_192.png",
+            sizes: "192x192",
+            type: "image/png",
+            purpose: "any maskable",
+          },
+          {
+            src: "pwa_512.png",
+            sizes: "512x512",
+            type: "image/png",
+            purpose: "any maskable",
+          },
+        ],
+        start_url: "/",
+        theme_color: "#FBF6F1",
+        background_color: "#FBF6F1",
+        display: "fullscreen",
       },
     }),
   ],
