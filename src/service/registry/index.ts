@@ -1,17 +1,10 @@
 import { useContractWrite, useAccount } from "wagmi";
 import { ProfileDate } from "@pages/Profile/CreateProfile";
 import { CustomizedItemData } from "@modules/CustomizedItemModal";
-import { web3StorageClient } from "@utils/web3Storage";
+import { web3StorageClient, upload } from "@utils/web3Storage";
 import RegistryAbi from "@utils/abis/Registry.json";
 
 export const useCreateProfile = () => {
-  // const { config } = usePrepareContractWrite({
-  //   address: "0xAEc621EC8D9dE4B524f4864791171045d6BBBe27",
-  //   abi: RegistryAbi,
-  //   functionName: "createProfile",
-  // });
-  const { connector } = useAccount();
-
   const { data, isLoading, isSuccess, write, error } = useContractWrite({
     address: "0xAEc621EC8D9dE4B524f4864791171045d6BBBe27",
     abi: RegistryAbi,
@@ -28,15 +21,7 @@ export const useCreateProfile = () => {
         ...data,
         customizedItems: [...customizedItems],
       };
-      const blob = new Blob([JSON.stringify(metadata)], {
-        type: "application/json",
-      });
-      const files = [
-        new File(["contents-of-file-1"], "plain-utf8.txt"),
-        new File([blob], "metadata.json"),
-      ];
-      const cid = await web3StorageClient.put(files);
-      console.log("stored files with cid:", cid);
+      const cid = await upload(metadata);
       return cid;
     } catch (err) {
       console.log(err);
@@ -53,7 +38,6 @@ export const useCreateProfile = () => {
       const cid = await uploadIPFS(data, customizedItems);
       let res = await write({
         args: [
-          //TODO: nounce should be dynamic
           new Date().getTime(),
           data.name,
           {

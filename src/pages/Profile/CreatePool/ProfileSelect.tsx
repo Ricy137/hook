@@ -6,7 +6,7 @@ import Select, { Option } from "@components/Select";
 import Label from "@components/Label";
 import { Account } from "@service/profile";
 import { profileIdfromRole } from "@utils/graphQl";
-import { PoolData } from ".";
+import { PoolData } from "@service/pool";
 
 const PROFILEID_QUERY = gql`
   query ProfileId($id: String!) {

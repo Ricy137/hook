@@ -1,8 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useQuery, gql } from "@apollo/client";
 import useSWR from "swr";
-import Card from "@components/Card";
-import { AddreProfileCard } from "@modules/Cards";
+import AddrCard from "@modules/AddrCard";
 import { splitedAddress } from "@utils/address";
 import { getCid } from "@utils/web3Storage";
 import { fetcher } from "@utils/fetch";
@@ -66,7 +65,7 @@ const Owner: React.FC<{ address: string }> = ({ address }) => {
         Profile Owner
       </div>
       <div className="w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-24px">
-        <AddreProfileCard address={address} />
+        <AddrCard address={address} />
       </div>
     </div>
   );
@@ -80,10 +79,7 @@ const Members: React.FC<{ members: Account[] }> = ({ members }) => {
       </div>
       <div className="w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-24px">
         {members.map((member) => (
-          <AddreProfileCard
-            address={splitedAddress(member.id)}
-            key={member.id}
-          />
+          <AddrCard address={splitedAddress(member.id)} key={member.id} />
         ))}
       </div>
     </div>

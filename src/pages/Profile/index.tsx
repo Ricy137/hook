@@ -1,5 +1,5 @@
 import ProfileOwned from "./ProfileOwned";
-import PoolManaged from "./PoolsManaging";
+// import PoolManaged from "./PoolsManaging";
 
 const Profile: React.FC = () => {
   return (
@@ -7,9 +7,9 @@ const Profile: React.FC = () => {
       <div className="w-full flex flex-col gap-y-40px">
         <ProfileOwned />
       </div>
-      <div className="w-full flex flex-col gap-y-40px">
+      {/* <div className="w-full flex flex-col gap-y-40px">
         <PoolManaged />
-      </div>
+      </div> */}
     </div>
   );
 };

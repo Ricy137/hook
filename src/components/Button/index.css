@@ -14,7 +14,7 @@
 }
 
 .fui-button--outlined:hover {
-  @apply bg-#000000 text-#FBF6F1;
+  @apply bg-#9AE9E9 text-#000000;
 }
 
 /* text button */

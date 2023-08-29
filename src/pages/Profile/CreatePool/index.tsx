@@ -10,21 +10,12 @@ import CustomizedItemModal, {
   CustomizedItemData,
   CuteomizedFormItems,
 } from "@modules/CustomizedItemModal";
+import { createPool, PoolData } from "@service/pool";
 import ProfileSelect from "./ProfileSelect";
 import StrategyFormItem from "./StrategyFormItem";
 
 //Form to create the pool
-export interface PoolData {
-  name: string;
-  profileId: string;
-  description: string;
-  eligibility: string;
-  applyLink: string;
-  managers: string[];
-  strategy: string;
-  customizedStrategy: boolean;
-  // customizedItems: CustomizedItemData[];
-}
+
 const CreatePool: React.FC = () => {
   const [customizedItems, setCustomizedItems] = useState<CustomizedItemData[]>(
     []
@@ -55,9 +46,9 @@ const CreatePool: React.FC = () => {
   );
 
   const handleSubmitForm = useCallback(
-    async (data: any) => {
+    async (data: PoolData) => {
       try {
-        console.log("data", data);
+        createPool(data);
       } catch (error) {
         console.log(error);
       }
@@ -80,6 +71,29 @@ const CreatePool: React.FC = () => {
       />
       <ProfileSelect setValue={setValue} />
       <StrategyFormItem setValue={setValue} control={control} />
+      <Input
+        title="Token Address"
+        type="text"
+        error={!!errors.tokenAddress}
+        {...register("tokenAddress")}
+        placeholder="Address of the token used in the pool"
+        required
+      />
+      <Input
+        title="The amount of the token"
+        type="number"
+        {...register("amount", {
+          validate: (value) => value >= 0,
+        })}
+      />
+      <Input
+        title="InitStrategyData"
+        type="text"
+        error={!!errors._initStrategyData}
+        {...register("_initStrategyData")}
+        placeholder="The data to initialize the strategy"
+        defaultValue={"0x"}
+      />
       <TextArea
         title="Pool Description"
         error={!!errors.description}
@@ -89,7 +103,7 @@ const CreatePool: React.FC = () => {
       />
       <TextArea
         title="Eligibility"
-        error={!!errors.description}
+        error={!!errors.eligibility}
         {...register("eligibility", { required: true })}
         placeholder="Please describe the eligibility of the pool"
         required
@@ -97,12 +111,12 @@ const CreatePool: React.FC = () => {
       <Input
         title="Apply"
         type="text"
-        error={!!errors.description}
+        error={!!errors.applyLink}
         {...register("applyLink", { required: true })}
         placeholder="Please provide the link to apply the pool"
         required
       />
-      <AddressFormItem text="manager" control={control} />
+      <AddressFormItem text="managers" control={control} />
       <CuteomizedFormItems
         customizedItems={customizedItems}
         setCustomizedItems={setCustomizedItems}

@@ -4,7 +4,7 @@ import Input from "@components/Input";
 import Select, { Option } from "@components/Select";
 import Label from "@components/Label";
 import { ClonableStrategies } from "@service/pool";
-import { PoolData } from ".";
+import { PoolData } from "@service/pool";
 
 //TODO: for form, it has setValue and controller two approaches. Make it only one approach (modify Select)
 const StrategyFormItem: React.FC<{
