@@ -30,6 +30,9 @@ export default defineConfig({
     VitePWA({
       injectRegister: "auto",
       registerType: "autoUpdate",
+      workbox: {
+        globPatterns: ["**/*.{js,css,html,ico,png,svg}"],
+      },
       devOptions: {
         enabled: true,
       },
@@ -69,6 +72,7 @@ export default defineConfig({
       "@hooks": path.resolve(__dirname, "src/hooks"),
       "@components": path.resolve(__dirname, "src/components"),
       "@service": path.resolve(__dirname, "src/service"),
+      "@cusTypes": path.resolve(__dirname, "src/types"),
       // '@i18n': path.resolve(__dirname, 'src/i18n'),
     },
   },

@@ -4,7 +4,7 @@ import { UseFormSetValue } from "react-hook-form";
 import { useAccount } from "wagmi";
 import Select, { Option } from "@components/Select";
 import Label from "@components/Label";
-import { Account } from "@service/profile";
+import { Account } from "@cusTypes/index";
 import { profileIdfromRole } from "@utils/graphQl";
 import { PoolData } from "@service/pool";
 

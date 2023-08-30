@@ -53,6 +53,9 @@ const Navbar: React.FC = () => {
           >
             Plaza
           </NavLink>
+          <NavLink to="/explorer" curPath={curPath === "/explorer"}>
+            Explorer
+          </NavLink>
         </ul>
         <div className="flex flex-row justify-between items-center gap-x-8px">
           <AuthConBtn>

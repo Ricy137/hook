@@ -15,6 +15,7 @@ import ProfileSelect from "./ProfileSelect";
 import StrategyFormItem from "./StrategyFormItem";
 
 //Form to create the pool
+//Archieved due to priority and development time limilattion
 
 const CreatePool: React.FC = () => {
   const [customizedItems, setCustomizedItems] = useState<CustomizedItemData[]>(

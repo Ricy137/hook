@@ -5,7 +5,8 @@ import AddrCard from "@modules/AddrCard";
 import { splitedAddress } from "@utils/address";
 import { getCid } from "@utils/web3Storage";
 import { fetcher } from "@utils/fetch";
-import { ProfileDetailData, Account } from "@service/profile";
+import { ProfileDetailData } from "@service/profile";
+import { Account } from "@cusTypes/index";
 
 const PROFILES_QUERY = gql`
   query ProfilesById($id: String!) {

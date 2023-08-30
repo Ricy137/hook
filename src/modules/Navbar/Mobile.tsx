@@ -8,9 +8,12 @@ const NavLink: React.FC<ComponentProps<typeof Link> & { curPath: string }> = ({
   curPath,
 }) => (
   <li
-    className={cx("relative flex items-center w-full h-48px", {
-      ["nav-link-mobile--active"]: curPath?.startsWith(to as string),
-    })}
+    className={cx(
+      "relative pl-40px flex items-center w-full h-48px dropdown-shadow",
+      {
+        ["nav-link-mobile--active"]: curPath?.startsWith(to as string),
+      }
+    )}
   >
     <Link className="flex items-center w-full h-full decoration-none" to={to}>
       {children}
@@ -29,9 +32,12 @@ const Mobile: React.FC<{ open: boolean; curPath: string }> = ({
         open && "translate-y-0px"
       )}
     >
-      <ul className="pl-40px m-0px flex flex-col gap-12px text-22px font-semibold dropdown-shadow">
+      <ul className="pl-0px m-0px flex flex-col gap-12px text-22px font-semibold">
         <NavLink to="/plaza" curPath={curPath}>
           Plaza
+        </NavLink>
+        <NavLink to="/explorer" curPath={curPath}>
+          explorer
         </NavLink>
       </ul>
     </div>
