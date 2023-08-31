@@ -9,7 +9,12 @@ import { getCid, getSuffix } from "@utils/web3Storage";
 import { fetcher } from "@utils/fetch";
 import { ProfileDetailData } from "@service/profile";
 import { Account } from "@cusTypes/index";
-import { NameEditModal } from "./Modals";
+import {
+  NameEditModal,
+  MetaEditModal,
+  AddMembersModal,
+  RemoveMembersModal,
+} from "./Modals";
 
 const PROFILES_QUERY = gql`
   query ProfilesById($id: String!) {
@@ -40,9 +45,14 @@ const EditProfile: React.FC = () => {
       variables: { id: profileId },
     }
   );
-  const { showModal } = useModal({
+  const { showModal: showNameEditor } = useModal({
     title: "Update Name",
     content: <NameEditModal />,
+  });
+
+  const { showModal: showMetadataEditor } = useModal({
+    title: "Update Metadata",
+    content: <MetaEditModal />,
   });
 
   return (
@@ -52,10 +62,16 @@ const EditProfile: React.FC = () => {
           Profile Details
         </div>
         <div className="flex flex-row items-center gap-x-8px">
-          <Button className="px-12px" variant="outlined" onClick={showModal}>
+          <Button
+            className="px-12px"
+            variant="outlined"
+            onClick={showNameEditor}
+          >
             Update Name
           </Button>
-          <Button className="px-12px">Update Metadata</Button>
+          <Button onClick={showMetadataEditor} className="px-12px">
+            Update Metadata
+          </Button>
         </div>
       </div>
       <div className="p-40px flex flex-col gap-y-24px w-full border-#cacbcb border-1px border-dashed rounded-24px box-border">
@@ -84,7 +100,6 @@ const Owner: React.FC<{ address: string }> = ({ address }) => {
         <div className="font-medium text-32px leading-40px my-24px">
           Profile Owner
         </div>
-        <Button variant="outlined">Transfer ownership</Button>
       </div>
       <div className="w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-24px">
         <AddrCard address={address} />
@@ -94,13 +109,34 @@ const Owner: React.FC<{ address: string }> = ({ address }) => {
 };
 
 const Members: React.FC<{ members: Account[] }> = ({ members }) => {
+  const { showModal: showAddMembers } = useModal({
+    title: "Add Members",
+    content: <AddMembersModal />,
+  });
+
+  const { showModal: showRemoveMembers } = useModal({
+    title: "Remove Members",
+    content: <RemoveMembersModal />,
+  });
+
   return (
     <div className="flex flex-col">
-      <div className="mb-24px sm:mb-0px flex flex-col sm:flex-row justify-between sm:items-center">
-        <div className="font-medium text-32px leading-40px my-24px">
+      <div className="mb-24px w-full flex flex-col sm:flex-row justify-between sm:items-center">
+        <div className="font-medium text-32px leading-40px">
           Profile Members
         </div>
-        <Button variant="outlined">Update members</Button>
+        <div className="flex flex-row items-center gap-x-8px">
+          <Button
+            className="px-12px"
+            variant="outlined"
+            onClick={showAddMembers}
+          >
+            Add members
+          </Button>
+          <Button onClick={showRemoveMembers} className="px-12px">
+            Update Metadata
+          </Button>
+        </div>
       </div>
       <div className="w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-24px">
         {members.map((member) => (
