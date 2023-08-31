@@ -12,7 +12,7 @@ const Plaza: React.FC = () => {
   const [activeId, setActiveId] = useState(0);
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 w-85% min-h-80vh xl:min-h-70vh 2xl:min-h-50vh border-#cacbcb border-1px border-solid">
+    <div className="mt-40px sm:mt-0px grid grid-cols-1 md:grid-cols-2 w-85% min-h-70vh xl:min-h-60vh 2xl:min-h-50vh border-#cacbcb border-1px border-solid">
       <Swiper
         className="w-full"
         modules={[EffectFade, Pagination, Autoplay]}
