@@ -9,7 +9,7 @@
    Furthermore, blockchain data is public, which opens the door for cross-ecosystem collaborations. In hook, we also connect lens profiles to Allo profiles based on owner/members' addresses. Such an infusion not only unlocked a tremendous amount of data to Allo system, but also provide a new dimension of profile insights.
    
 ### The comprehensive process of profiles
-   Hook not only provides a linked profiles network for pool managers' reference, you can also create or manage your owned profiles in Hook. Connect with Hook with your wallet, then you will see the profile entry, where you can create and mange your profiles.
+   Hook has not only provided a linked profiles network for pool managers' reference, you can also create or manage your owned profiles in Hook. Connect with Hook with your wallet, then you will see the profile entry, where you can create and mange your profiles.
    And though we've preset few fields for you when create profiles, you can also add your customized fiels by the customized items button.
 
 ## PWAs
