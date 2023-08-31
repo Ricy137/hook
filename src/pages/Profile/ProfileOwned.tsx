@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import { Link } from "react-router-dom";
 import { useQuery, gql } from "@apollo/client";
 import { useAccount } from "wagmi";
@@ -9,8 +10,19 @@ import { ProfileData } from "@service/profile";
 
 const ProfileOwned: React.FC = () => {
   const { address } = useAccount();
+  const refresh = useCallback(() => {
+    location.reload();
+  }, []);
+
   return (
     <SectionCard icon={Icon} title="Owned Profiles">
+      <Button
+        className="mb-24px sm:hidden"
+        variant="outlined"
+        onClick={refresh}
+      >
+        Refresh Page
+      </Button>
       <ProfileOwnedList address={address as string} />
       <CreateProfileBtn />
     </SectionCard>
