@@ -1,12 +1,10 @@
 import { useContractWrite } from "wagmi";
-import { useNavigate } from "react-router-dom";
 import { useShowToast } from "@components/Toast";
 import RegistryAbi from "@utils/abis/Registry.json";
 
 export const useUpdateName = () => {
   const currentUrl = window.location.href;
   const showToast = useShowToast();
-  const navigate = useNavigate();
 
   const { data, isLoading, isSuccess, writeAsync, error, status } =
     useContractWrite({
@@ -23,7 +21,6 @@ export const useUpdateName = () => {
         args: [currentUrl.split("/")[5], newName],
       });
       showToast({ content: "Name updated successfully", type: "success" });
-      navigate(`/profile`);
     } catch (err) {
       showToast({
         content: err instanceof Error ? err.message : "Failed to update name",

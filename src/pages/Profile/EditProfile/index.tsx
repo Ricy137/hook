@@ -80,7 +80,7 @@ const EditProfile: React.FC = () => {
 const Owner: React.FC<{ address: string }> = ({ address }) => {
   return (
     <div className="flex flex-col">
-      <div className="flex flex-col sm:flex-row justify-between sm:items-center">
+      <div className="mb-24px sm:mb-0px flex flex-col sm:flex-row justify-between sm:items-center">
         <div className="font-medium text-32px leading-40px my-24px">
           Profile Owner
         </div>
@@ -96,7 +96,7 @@ const Owner: React.FC<{ address: string }> = ({ address }) => {
 const Members: React.FC<{ members: Account[] }> = ({ members }) => {
   return (
     <div className="flex flex-col">
-      <div className="flex flex-col sm:flex-row justify-between sm:items-center">
+      <div className="mb-24px sm:mb-0px flex flex-col sm:flex-row justify-between sm:items-center">
         <div className="font-medium text-32px leading-40px my-24px">
           Profile Members
         </div>
