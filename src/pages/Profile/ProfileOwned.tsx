@@ -45,7 +45,14 @@ const ProfileOwnedList: React.FC<{ address: string }> = ({ address }) => {
     }
   );
 
-  return <ProfileList data={data} loading={loading} error={error} />;
+  return (
+    <ProfileList
+      data={data}
+      loading={loading}
+      error={error}
+      linkPrefix="/profile/editprofile"
+    />
+  );
 };
 
 export default ProfileOwned;

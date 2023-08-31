@@ -1,11 +1,11 @@
 import { useCallback } from "react";
 import { useQuery, gql, ApolloError } from "@apollo/client";
-import { FallbackProps } from "react-error-boundary";
+import { useShowToast } from "@components/Toast";
 import ProfileList from "@modules/ProfileList";
 import Button from "@components/Button";
 
 const PROFILES_QUERY = gql`
-  query PROFILES {
+  query PROFILES($skip: Int!) {
     profiles(first: 5, skip: $skip) {
       id
       name
@@ -22,17 +22,22 @@ const FullProfiles: React.FC = () => {
       skip: 0,
     },
   });
+  const showToast = useShowToast();
 
   const handleLoadMore = useCallback(async () => {
-    const newData = await fetchMore({
-      variables: {
-        skip: data?.profiles.length,
-      },
-    });
-    if (newData?.data.tokens.length === 0) {
-      alert("no more profiles");
+    try {
+      const newData = await fetchMore({
+        variables: {
+          skip: data?.profiles.length,
+        },
+      });
+      if (newData && newData?.data.profiles.length === 0) {
+        showToast({ content: "no more profiles", type: "failed" });
+      }
+    } catch (e) {
+      console.log(e);
     }
-  }, [data?.profiles.length]);
+  }, [data]);
 
   return (
     <div className="p-40px flex flex-col gap-y-24px w-full">

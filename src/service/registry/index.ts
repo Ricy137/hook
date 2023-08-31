@@ -1,16 +1,17 @@
-import { useContractWrite, useAccount } from "wagmi";
+import { useContractWrite } from "wagmi";
 import { ProfileDate } from "@pages/Profile/CreateProfile";
 import { CustomizedItemData } from "@modules/CustomizedItemModal";
 import { web3StorageClient, upload } from "@utils/web3Storage";
 import RegistryAbi from "@utils/abis/Registry.json";
 
 export const useCreateProfile = () => {
-  const { data, isLoading, isSuccess, write, error } = useContractWrite({
-    address: "0xAEc621EC8D9dE4B524f4864791171045d6BBBe27",
-    abi: RegistryAbi,
-    functionName: "createProfile",
-    chainId: 44787,
-  });
+  const { data, isLoading, isSuccess, writeAsync, error, status } =
+    useContractWrite({
+      address: "0xAEc621EC8D9dE4B524f4864791171045d6BBBe27",
+      abi: RegistryAbi,
+      functionName: "createProfile",
+      chainId: 44787,
+    });
 
   const uploadIPFS = async (
     data: ProfileDate,
@@ -34,9 +35,9 @@ export const useCreateProfile = () => {
     customizedItems: CustomizedItemData[]
   ) => {
     try {
-      if (!write) throw new Error("Error creating profile");
+      if (!writeAsync) throw new Error("Error creating profile");
       const cid = await uploadIPFS(data, customizedItems);
-      let res = await write({
+      let res = await writeAsync({
         args: [
           new Date().getTime(),
           data.name,
@@ -55,5 +56,7 @@ export const useCreateProfile = () => {
     }
   };
 
-  return { createProfile, isLoading, isSuccess, data, error };
+  return { createProfile, isLoading, isSuccess, data, error, status };
 };
+
+export * from "./edit";

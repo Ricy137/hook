@@ -1,12 +1,15 @@
 import { useParams } from "react-router-dom";
 import { useQuery, gql } from "@apollo/client";
 import useSWR from "swr";
+import Button from "@components/Button";
+import { useModal } from "@components/Modal";
 import AddrCard from "@modules/AddrCard";
 import { splitedAddress } from "@utils/address";
 import { getCid, getSuffix } from "@utils/web3Storage";
 import { fetcher } from "@utils/fetch";
 import { ProfileDetailData } from "@service/profile";
 import { Account } from "@cusTypes/index";
+import { NameEditModal } from "./Modals";
 
 const PROFILES_QUERY = gql`
   query ProfilesById($id: String!) {
@@ -29,7 +32,7 @@ const PROFILES_QUERY = gql`
   }
 `;
 
-const ProfileDetail: React.FC = () => {
+const EditProfile: React.FC = () => {
   const { profileId } = useParams<{ profileId: string }>();
   const { loading, error, data } = useQuery<{ profile: ProfileDetailData }>(
     PROFILES_QUERY,
@@ -37,11 +40,23 @@ const ProfileDetail: React.FC = () => {
       variables: { id: profileId },
     }
   );
+  const { showModal } = useModal({
+    title: "Update Name",
+    content: <NameEditModal />,
+  });
 
   return (
     <div className="mt-40px flex flex-col w-95% sm:w-85% ">
-      <div className="font-medium text-32px leading-40px mb-24px">
-        Profile Details
+      <div className="mb-24px w-full flex flex-col sm:flex-row justify-between sm:items-center">
+        <div className="font-medium text-32px leading-40px">
+          Profile Details
+        </div>
+        <div className="flex flex-row items-center gap-x-8px">
+          <Button className="px-12px" variant="outlined" onClick={showModal}>
+            Update Name
+          </Button>
+          <Button className="px-12px">Update Metadata</Button>
+        </div>
       </div>
       <div className="p-40px flex flex-col gap-y-24px w-full border-#cacbcb border-1px border-dashed rounded-24px box-border">
         <div className="w-full text-16px leading-24px text-#969799 truncate">
@@ -65,8 +80,11 @@ const ProfileDetail: React.FC = () => {
 const Owner: React.FC<{ address: string }> = ({ address }) => {
   return (
     <div className="flex flex-col">
-      <div className="font-medium text-32px leading-40px my-24px">
-        Profile Owner
+      <div className="flex flex-col sm:flex-row justify-between sm:items-center">
+        <div className="font-medium text-32px leading-40px my-24px">
+          Profile Owner
+        </div>
+        <Button variant="outlined">Transfer ownership</Button>
       </div>
       <div className="w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-24px">
         <AddrCard address={address} />
@@ -78,8 +96,11 @@ const Owner: React.FC<{ address: string }> = ({ address }) => {
 const Members: React.FC<{ members: Account[] }> = ({ members }) => {
   return (
     <div className="flex flex-col">
-      <div className="font-medium text-32px leading-40px my-24px">
-        Profile Members
+      <div className="flex flex-col sm:flex-row justify-between sm:items-center">
+        <div className="font-medium text-32px leading-40px my-24px">
+          Profile Members
+        </div>
+        <Button variant="outlined">Update members</Button>
       </div>
       <div className="w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-24px">
         {members.map((member) => (
@@ -90,7 +111,7 @@ const Members: React.FC<{ members: Account[] }> = ({ members }) => {
   );
 };
 
-export default ProfileDetail;
+export default EditProfile;
 
 const ProfileMetaData: React.FC<{
   pointer: string;

@@ -42,7 +42,10 @@ const PROFILE_QUERY = gql`
   }
 `;
 
-export const ProfileCardById: React.FC<{ id: string }> = ({ id }) => {
+export const ProfileCardById: React.FC<{ id: string; link: string }> = ({
+  id,
+  link,
+}) => {
   const { loading, error, data } = useQuery<{
     profile: { id: string; name: string; owner: { id: string } };
   }>(PROFILE_QUERY, {
@@ -51,7 +54,7 @@ export const ProfileCardById: React.FC<{ id: string }> = ({ id }) => {
 
   return (
     <Link
-      to={`/profile/${id}`}
+      to={link}
       className="p-24px sm:p-40px flex flex-col gap-y-24px no-underline hover:bg-#CBF0ED rounded-24px shadow-[0px_2px_8px_0px_rgba(0,0,0,0.12)] cursor-pointer"
     >
       <div className="h-24px text-16px leading-24px text-#969799 truncate">

@@ -10,6 +10,7 @@ export interface SlogonCardProps {
   description: string;
   to: string;
   wrapperClass?: string;
+  outsideLink?: boolean;
 }
 
 export const SlogonCard: React.FC<SlogonCardProps> = ({
@@ -17,6 +18,7 @@ export const SlogonCard: React.FC<SlogonCardProps> = ({
   description,
   to,
   wrapperClass,
+  outsideLink,
 }) => (
   <div
     className={cx(
@@ -25,9 +27,15 @@ export const SlogonCard: React.FC<SlogonCardProps> = ({
     )}
   >
     <div className="text-18px leading-26px font-medium">{title}</div>
-    <Link to={to} className="no-underline">
-      <Button variant="outlined">Learn More</Button>
-    </Link>
+    {outsideLink ? (
+      <a href={to} target="_blank" className="no-underline">
+        <Button variant="outlined">Learn More</Button>
+      </a>
+    ) : (
+      <Link to={to} className="no-underline">
+        <Button variant="outlined">Learn More</Button>
+      </Link>
+    )}
     <div>{description}</div>
   </div>
 );

@@ -36,21 +36,20 @@ const httpLink = createHttpLink({
 
 const client = new ApolloClient({
   link: httpLink,
-  cache: new InMemoryCache(),
-  //   {
-  //   typePolicies: {
-  //     Query: {
-  //       fields: {
-  //         profile: {
-  //           keyArgs: false,
-  //           merge(existing = [], incoming: any[]) {
-  //             return [...existing, ...incoming];
-  //           },
-  //         },
-  //       },
-  //     },
-  //   },
-  // }
+  cache: new InMemoryCache({
+    typePolicies: {
+      Query: {
+        fields: {
+          profiles: {
+            keyArgs: false,
+            merge(existing = [], incoming: any[]) {
+              return [...existing, ...incoming];
+            },
+          },
+        },
+      },
+    },
+  }),
 });
 
 const Providers: React.FC<PropsWithChildren> = ({ children }) => {

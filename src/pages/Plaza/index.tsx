@@ -36,16 +36,17 @@ const Plaza: React.FC = () => {
           </SwiperSlide>
           <SwiperSlide className="w-full h-full">
             <SlogonCard
-              to="/create/grant"
-              title="Create your customized pools"
-              description="Empowering your communities to determine the most effective and fittable approach for allocation and distribution of capital"
+              to="/explorer"
+              title="Explore the ecosystem"
+              description="Unveil profiles connected by addresses and lens network for informed grant Decisions"
             />
           </SwiperSlide>
           <SwiperSlide className="w-full h-full">
             <SlogonCard
-              to="/grants"
-              title="Apply for grants"
-              description="Explore potential grants to support your projects and get inspired for allocation strategies"
+              outsideLink
+              to="https://discord.gg/9uFtydu4"
+              title="Join the community"
+              description="We're an open-source, on-going project. Join our discord to get the latest news and collaborate together"
             />
           </SwiperSlide>
         </div>

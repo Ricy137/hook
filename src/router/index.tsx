@@ -9,6 +9,7 @@ import Navbar from "@modules/Navbar";
 import Plaza from "@pages/Plaza";
 import Profile from "@pages/Profile";
 import CreateProfile from "@pages/Profile/CreateProfile";
+import EditProfile from "@pages/Profile/EditProfile";
 // import CreatePool from "@pages/Profile/CreatePool";
 import ProfileDetail from "@pages/ProfileDetail";
 import Explorer from "@pages/Explorer";
@@ -25,11 +26,6 @@ const AppRouter: React.FC = () => {
             <Route key="plaza" path="plaza" element={<Plaza />} />
             <Route key="profile" path="profile" element={<Profile />} />
             <Route
-              key="profileId"
-              path="profile/:profileId"
-              element={<ProfileDetail />}
-            />
-            <Route
               key="profileCreate"
               path="profile/createprofile"
               element={<CreateProfile />}
@@ -39,7 +35,17 @@ const AppRouter: React.FC = () => {
               //   path="profile/createpool"
               //   element={<CreatePool />}
             />
+            <Route
+              key="profileEdit"
+              path="profile/editprofile/:profileId"
+              element={<EditProfile />}
+            />
             <Route key="explorer" path="explorer" element={<Explorer />} />
+            <Route
+              key="profileId"
+              path="explorer/profiledetail/:profileId"
+              element={<ProfileDetail />}
+            />
             <Route
               key="explorerProfile"
               path="explorer/profile/:address"

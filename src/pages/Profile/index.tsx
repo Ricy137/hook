@@ -2,8 +2,9 @@ import ProfileOwned from "./ProfileOwned";
 // import PoolManaged from "./PoolsManaging";
 
 const Profile: React.FC = () => {
+
   return (
-    <div className="w-85% flex flex-col gap-y-24px">
+    <div className="py-40px w-85% flex flex-col gap-y-24px">
       <div className="w-full flex flex-col gap-y-40px">
         <ProfileOwned />
       </div>

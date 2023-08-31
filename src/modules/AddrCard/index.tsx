@@ -63,8 +63,8 @@ const LensProfile: React.FC<{ handle: string }> = ({ handle }) => (
 const LensProfileSkeleton: React.FC<{
   loading: boolean;
   error: string | null;
-}> = ({ loading }) => (
-  <div>{loading ? "loading..." : "failed to fetch lens data"}</div>
-);
+}> = ({ loading, error }) => {
+  return <div>{loading ? "loading..." : "No lens profile detected"}</div>;
+};
 
 export default AddrCard;

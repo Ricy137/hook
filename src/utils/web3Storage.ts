@@ -9,6 +9,11 @@ export const getCid = (pointer: string) => {
   return cids[0];
 };
 
+export const getSuffix = (pointer: string) => {
+  const cids = pointer.split("/");
+  return cids[1];
+};
+
 export const upload = async (metadata: object) => {
   try {
     const blob = new Blob([JSON.stringify(metadata)], {

@@ -1,21 +1,31 @@
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import Button from "@components/Button";
-import { useConnect } from "wagmi";
+import { useConnect, Connector, useAccount } from "wagmi";
 import { useModal } from "@components/Modal";
+import { useShowToast } from "@components/Toast";
 
 const WalletsBoard: React.FC = () => {
+  const showToast = useShowToast();
   const { connect, connectors, error, isLoading, pendingConnector } =
-    useConnect();
+    useConnect({ chainId: 44787 });
   const { hideModal } = useModal();
   //TODO: this is too specific, make it abstract
-  const handleWalletConnect = useCallback(async () => {
+  const handleWalletConnect = useCallback(async (connector: Connector) => {
     try {
-      await connect({ connector: connectors[1] });
-      hideModal();
+      await connect({ connector: connector });
+      if (connector.id === "walletConnect") {
+        hideModal();
+      }
     } catch (error) {
-      console.log(error);
+      showToast({ type: "failed", content: "failed to connect" });
     }
   }, []);
+
+  useEffect(() => {
+    if (!isLoading && pendingConnector) {
+      hideModal();
+    }
+  }, [isLoading, pendingConnector]);
 
   return (
     <div className="flex flex-col gap-y-24px">
@@ -23,11 +33,7 @@ const WalletsBoard: React.FC = () => {
         return (
           <Button
             key={connector.id}
-            onClick={
-              connector.id === "walletConnect"
-                ? handleWalletConnect
-                : () => connect({ connector })
-            }
+            onClick={() => handleWalletConnect(connector)}
             disabled={isLoading && pendingConnector?.id === connector.id}
           >
             {connector.name}

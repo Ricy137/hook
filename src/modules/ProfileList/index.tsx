@@ -8,7 +8,8 @@ const ProfileList: React.FC<{
   data: { profiles: ProfileData[] } | undefined;
   error: ApolloError | undefined;
   loading: boolean;
-}> = ({ data, loading, error }) => {
+  linkPrefix?: string;
+}> = ({ data, loading, error, linkPrefix }) => {
   return (
     <div className="w-full">
       {loading && <div>Loading...</div>}
@@ -24,7 +25,11 @@ const ProfileList: React.FC<{
               id={profile.id}
               name={profile.name}
               owner={profile.owner.id}
-              link={`/profile/${profile.id}`}
+              link={
+                linkPrefix
+                  ? `${linkPrefix}/${profile.id}`
+                  : `/explorer/profiledetail/${profile.id}`
+              }
             />
           ))}
       </div>
@@ -63,7 +68,11 @@ export const ProfilesListById: React.FC<{ address: string }> = ({
         {data &&
           data.account.roles.length > 0 &&
           data.account.roles.map((role) => (
-            <ProfileCardById key={role.id} id={splitedId(role.id)} />
+            <ProfileCardById
+              key={role.id}
+              id={splitedId(role.id)}
+              link={`/explorer/profiledetail/${splitedId(role.id)}`}
+            />
           ))}
       </div>
     </div>

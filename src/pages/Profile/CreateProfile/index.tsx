@@ -1,10 +1,12 @@
-import { useCallback, MouseEvent, useState } from "react";
+import { useCallback, MouseEvent, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { isAddress } from "ethers";
 import Input from "@components/Input";
 import TextArea from "@components/TextArea";
 import Button from "@components/Button";
 import { useModal } from "@components/Modal";
+import { useShowToast } from "@components/Toast";
 import { useCreateProfile } from "@service/registry";
 import MembersFromItem from "@modules/AddressFormItem";
 import CustomizedItemModal, {
@@ -32,7 +34,10 @@ const CreateProfile: React.FC = () => {
     formState: { errors },
     control,
   } = useForm<ProfileDate>();
-  const { createProfile, isLoading, isSuccess, error } = useCreateProfile();
+  const showToast = useShowToast();
+  const navigate = useNavigate();
+  const { createProfile, isLoading, error, data, isSuccess } =
+    useCreateProfile();
 
   const handleAddCustomizedItem = useCallback((data: CustomizedItemData) => {
     setCustomizedItems([...customizedItems, data]);
@@ -54,14 +59,29 @@ const CreateProfile: React.FC = () => {
   const handleSubmitForm = useCallback(
     async (data: any) => {
       try {
-        let res = await createProfile(data, customizedItems);
-        console.log("res", res);
+        await createProfile(data, customizedItems);
       } catch (error) {
         console.log(error);
       }
     },
     [customizedItems]
   );
+
+  useEffect(() => {
+    if (isSuccess) {
+      setTimeout(() => navigate("/profile"), 2000);
+      showToast({
+        type: "success",
+        content: "Profile created successfully, will redirect automatically",
+      });
+    }
+  }, [isSuccess]);
+
+  useEffect(() => {
+    if (!!error) {
+      showToast({ type: "failed", content: "Failed to create profile" });
+    }
+  }, [error]);
 
   return (
     <form
@@ -115,7 +135,8 @@ const CreateProfile: React.FC = () => {
         setCustomizedItems={setCustomizedItems}
       />
       <div className="flex flex-row items-center gap-x-24px">
-        <Button>Submit</Button>
+        <Button disabled={isLoading || isSuccess}>Submit</Button>
+        {/* <Button>Submit</Button> */}
         <Button variant="outlined" onClick={showCustomizedItemModal}>
           Add customized form item
         </Button>
