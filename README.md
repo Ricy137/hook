@@ -1,6 +1,6 @@
 # Introduction
 
-   Hook is a grants project built on Allo and Celo. Its main goal is to elevate profile analysis and grant decisions by linked profiles network and associated lens data. Hook is also a progressive web app, which means it's installable and works offline and it's built mobile friend, and wallectConnect supported.
+   Hook is a grants project built on Allo and Celo. Its main goal is to elevate profile analysis and grant decisions by linked profiles network and associated lens data. Hook is also a progressive web app, which means it's installable and works offline. It's mobile friendly, wallectConnect supported and if you pay some attention, you will find the Hook logo is an animated svg :) . 
 
 ## Linked profiles network and lens
    A key problem to be solved for grants programs is how to evaluate projects. In Allo, profile is the main representation of a project and is also the main reference for pool managers.So how would Hook help pool managers to evaluate a profile?
