@@ -1,8 +1,7 @@
 # Introduction
 
-   Hook is a grants project built on Allo and Celo. Its main goal is to elevate profile analysis and grant decisions by linked profiles network and associated lens data. Hook is also a progressive web app, which means it's installable and works offline.
+   Hook is a grants project built on Allo and Celo. Its main goal is to elevate profile analysis and grant decisions by linked profiles network and associated lens data. Hook is also a progressive web app, which means it's installable and works offline and it's built mobile friend, and wallectConnect supported.
 
-   live demo, works both on mobile or desktop: [here](https://hook-indol.vercel.app/) or [here](https://hook-git-main-ricy137.vercel.app/)
 ## Linked profiles network and lens
    A key problem to be solved for grants programs is how to evaluate projects. In Allo, profile is the main representation of a project and is also the main reference for pool managers.So how would Hook help pool managers to evaluate a profile?
    Behind a specific profile is people, owners or members. They've done other projects and also created other profiles. In hook, profiles are linked based on owner and members' addresses. So while pool managers are checking a specific profile, links other profiles of the owner or members are also presented, which provide the pool managers more comprehensive information.
